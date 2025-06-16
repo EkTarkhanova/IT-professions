@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <link rel="icon" type="image/png" href="img/icon1.png">
+  <meta charset="UTF-8">
+  <title>IT-справочник</title>
+  <link rel="stylesheet" href="style/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h1 class="sidebar-title">веб-справочник<br><span>IT-профессий</span></h1>
+      <nav class="sidebar-menu">
+        <button class="menu-btn active" onclick="location.href='test.html'">Тест на профориентацию</button>
+        <button class="menu-btn" onclick="location.href='interests.html'">Профессии по интересам</button>
+        <button class="menu-btn" onclick="location.href='profession-library.html'">Библиотека профессий</button>
+        <button class="menu-btn" onclick="location.href='glossary.html'">Глоссарий</button>
+      </nav>
+      <a href="https://t.me/quimoriz" class="support-link">Написать в поддержку</a>
+    </aside>
+
+    <main class="main-content">
+
+      <section class="hero">
+        <h1>Найди свою IT-профессию</h1>
+        <p>Платформа для тех, кто хочет сделать уверенный шаг в мир технологий. Пройди тест, отметь интересы, изучи профессию.</p>
+      </section>
+
+      <section class="features">
+        <div class="feature-card" onclick="location.href='test.html'">
+          <img src="img/test-icon.png" alt="Тест">
+          <h3>Тест на профориентацию</h3>
+          <p>Ответь на 15 вопросов и узнай, какие профессии подходят именно тебе.</p>
+        </div>
+        <div class="feature-card" onclick="location.href='interests.html'">
+          <img src="img/interest-icon.png" alt="Интересы">
+          <h3>Профессии по интересам</h3>
+          <p>Отметь, что тебе интересно, и мы покажем подходящие профессии.</p>
+        </div>
+        <div class="feature-card" onclick="location.href='profession-library.html'">
+          <img src="img/library-icon.png" alt="Библиотека">
+          <h3>Библиотека профессий</h3>
+          <p>Подробные карточки IT-профессий с описанием и примерами.</p>
+        </div>
+        <div class="feature-card" onclick="location.href='glossary.html'">
+          <img src="img/glossary-icon.png" alt="Глоссарий">
+          <h3>Глоссарий</h3>
+          <p>Пойми термины, найди разницу между backend, fullstack и другими.</p>
+        </div>
+      </section>
+
+      <section class="library-preview">
+        <h2>Популярные профессии</h2>
+        <div class="profession-library">
+            <div class="result-card">
+                <p class="main-prof">Frontend-разработчик</p>
+                <p>Создает интерфейсы и взаимодействие пользователя с сайтом.</p>
+            </div>
+            <div class="result-card">
+                <p class="main-prof">QA-инженер</p>
+                <p>Тестирует программные продукты на ошибки и недочеты.</p>
+             </div>
+            <div class="result-card">
+                <p class="main-prof">UX/UI-дизайнер</p>
+                 <p>Проектирует пользовательские интерфейсы и визуальные элементы.</p>
+            </div>
+        </div>
+         <a href="profession-library.html" class="view-all-link">Смотреть все профессии →</a>
+    </section>
+
+      <section class="about">
+        <h2>Как пользоваться платформой</h2>
+        <ul>
+          <li>🚀 Пройди тест на профориентацию</li>
+          <li>💡 Отметь интересы — получи предложения</li>
+          <li>📚 Изучи карточки профессий</li>
+          <li>🎯 Выбери свой путь в IT</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script src="script/main.js"></script>
+</body>
+</html>

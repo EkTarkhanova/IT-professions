@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Профессии по интересам</title>
+  <link rel="stylesheet" href="style/style.css" />
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h1 class="sidebar-title">
+        веб-справочник<br /><span>IT-профессий</span>
+      </h1>
+      <nav class="sidebar-menu">
+        <button class="menu-btn active" onclick="location.href='index.html'">На главную</button>
+        <button class="menu-btn" onclick="location.href='test.html'">Тест на профориентацию</button>
+        <button class="menu-btn" onclick="location.href='profession-library.html'">Библиотека профессий</button>
+        <button class="menu-btn" onclick="location.href='glossary.html'">Глоссарий</button>
+      </nav>
+      <a href="https://t.me/quimoriz" class="support-link">Написать в поддержку</a>
+    </aside>
+
+    <div class="container">
+      <main class="main-content">
+        <h2>Выберите интересы:</h2>
+        <div class="interest-tags">
+          <button class="interest-tag" data-interest="creative">Креативность</button>
+          <button class="interest-tag" data-interest="logic">Логика</button>
+          <button class="interest-tag" data-interest="универсальность">Универсальность</button>
+          <button class="interest-tag" data-interest="mobile">Мобильные технологии</button>
+          <button class="interest-tag" data-interest="инфраструктура">Инфраструктура</button>
+          <button class="interest-tag" data-interest="тестирование">Внимательность</button>
+          <button class="interest-tag" data-interest="аналитика">Анализ информации</button>
+          <button class="interest-tag" data-interest="ai">Искусственный интеллект</button>
+          <button class="interest-tag" data-interest="security">Безопасность</button>
+          <button class="interest-tag" data-interest="interface">Интерфейсы</button>
+          <button class="interest-tag" data-interest="management">Управление</button>
+          <button class="interest-tag" data-interest="architecture">Архитектура решений</button>
+          <button class="interest-tag" data-interest="gamedev">Игры</button>
+          <button class="interest-tag" data-interest="support">Помощь другим</button>
+          <button class="interest-tag" data-interest="documentation">Письмо и документация</button>
+        </div>
+
+        <button id="apply-filter" class="apply-filter-btn">Показать подходящие профессии</button>
+
+        <h2 style="margin-top: 40px;">Результаты:</h2>
+        <div id="profession-list" class="profession-library"></div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    let selected = new Set();
+
+    const interestTagMap = {
+      creative: ["creative", "design", "interface", "creativity"],
+      logic: ["logic", "backend", "systems"],
+      универсальность: ["универсальность", "fullstack", "frontend", "backend"],
+      mobile: ["mobile", "android", "ios"],
+      инфраструктура: ["инфраструктура", "devops", "infrastructure", "networks"],
+      тестирование: ["qa", "тестирование", "качество"],
+      аналитика: ["аналитика", "sql", "analysis", "data"],
+      ai: ["ai", "ml", "python"],
+      security: ["security", "cybersecurity", "networks"],
+      interface: ["interface", "ux", "ui", "design"],
+      management: ["management", "scrum", "product"],
+      architecture: ["architecture", "senior", "design"],
+      gamedev: ["gamedev", "graphics", "csharp"],
+      support: ["support", "helpdesk", "junior"],
+      documentation: ["documentation", "writing", "communication"]
+    };
+
+    function renderProfessions(interests) {
+      fetch("data/professions.json")
+        .then(res => res.json())
+        .then(data => {
+          const list = document.getElementById("profession-list");
+          list.innerHTML = "";
+
+          const tagsFromInterests = new Set();
+          interests.forEach(interest => {
+            const mappedTags = interestTagMap[interest] || [];
+            mappedTags.forEach(tag => tagsFromInterests.add(tag));
+          });
+
+          const matched = data
+            .map(prof => {
+              const matchCount = prof.tags.filter(tag => tagsFromInterests.has(tag)).length;
+              return { ...prof, matchCount };
+            })
+            .filter(p => p.matchCount > 0)
+            .sort((a, b) => b.matchCount - a.matchCount);
+
+          if (matched.length === 0) {
+            list.innerHTML = "<p>Нет подходящих профессий.</p>";
+            return;
+          }
+
+          matched.forEach(prof => {
+            const card = document.createElement("div");
+            card.className = "result-card";
+            card.innerHTML = `
+              <p class="main-prof">${prof.title}</p>
+              <p>${prof.preview || "Описание скоро появится."}</p>
+              <p class="match-info">Совпадение: ${prof.matchCount} ${getMatchWord(prof.matchCount)}</p>
+            `;
+            card.addEventListener("click", () => {
+  window.location.href = "profession-library.html#" + prof.id;
+});
+
+            list.appendChild(card);
+          });
+        });
+    }
+
+    function getMatchWord(n) {
+      if (n % 10 === 1 && n % 100 !== 11) return "";
+      if ([2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100)) return "";
+      return "";
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const tags = document.querySelectorAll(".interest-tag");
+      const applyBtn = document.getElementById("apply-filter");
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const initial = urlParams.get("interests")?.split(",") || [];
+
+      initial.forEach(int => selected.add(int));
+
+      tags.forEach(tag => {
+        const interest = tag.getAttribute("data-interest");
+        if (selected.has(interest)) tag.classList.add("active");
+
+        tag.addEventListener("click", () => {
+          tag.classList.toggle("active");
+          if (selected.has(interest)) {
+            selected.delete(interest);
+          } else {
+            selected.add(interest);
+          }
+        });
+      });
+
+      applyBtn.addEventListener("click", () => {
+        const interests = Array.from(selected);
+        if (interests.length === 0) {
+          alert("Выберите хотя бы один интерес!");
+          return;
+        }
+        renderProfessions(interests);
+      });
+
+      if (initial.length > 0) {
+        renderProfessions(initial);
+      }
+    });
+  </script>
+</body>
+</html>

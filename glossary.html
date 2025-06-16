@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Глоссарий</title>
+  <link rel="stylesheet" href="style/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h1 class="sidebar-title">веб-справочник<br><span>IT-профессий</span></h1>
+      <nav class="sidebar-menu">
+        <button class="menu-btn active" onclick="location.href='index.html'">На главную</button>
+        <button class="menu-btn" onclick="location.href='test.html'">Тест на профориентацию</button>
+        <button class="menu-btn" onclick="location.href='interests.html'">Профессии по интересам</button>
+        <button class="menu-btn" onclick="location.href='profession-library.html'">Библиотека профессий</button>
+      </nav>
+      <a href="https://t.me/quimoriz" class="support-link">Написать в поддержку</a>
+    </aside>
+
+    <main class="main-content">
+      <header class="sea  rch-header">
+        <input type="text" placeholder="Поиск по терминам..." class="search-input" id="searchGlossary">
+      </header>
+
+      <section class="glossary-section" id="glossary-list">
+      </section>
+    </main>
+  </div>
+
+  <script src="script/glossary.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Профориентационный тест</title>
+  <link rel="stylesheet" href="style/style.css" />
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h1 class="sidebar-title">веб-справочник<br /><span>IT-профессий</span></h1>
+      <nav class="sidebar-menu">
+        <button class="menu-btn active" onclick="location.href='index.html'">На главную</button>
+        <button class="menu-btn" onclick="location.href='interests.html'">Профессии по интересам</button>
+        <button class="menu-btn" onclick="location.href='profession-library.html'">Библиотека профессий</button>
+        <button class="menu-btn" onclick="location.href='glossary.html'">Глоссарий</button>
+      </nav>
+      <a href="https://t.me/quimoriz" class="support-link">Написать в поддержку</a>
+    </aside>
+
+    <main class="main-content">
+      <h2>Профориентационный тест</h2>
+      <form id="quiz-form"></form>
+      <button id="submit-btn" class="test-submit-btn" type="button">Узнать результат</button>
+      <div id="quiz-result" class="result-card" style="display:none;"></div>
+      <div id="nav-buttons" style="display:none; margin-top: 20px;">
+        <button id="go-library" class="test-submit-btn" type="button">Перейти в библиотеку профессий</button>
+        <button id="back-to-results" class="test-submit-btn" type="button" style="display:none; margin-left:10px;">Вернуться к результатам теста</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="script/test.js"></script>
+</body>
+</html>
