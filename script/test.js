@@ -1,6 +1,7 @@
 // Пути к JSON-файлам
-const professionsURL = 'data/professions.json';
-const questionsURL = 'data/test.json';
+const questionsURL = './data/test.json';
+const professionsURL = './data/professions.json';
+
 
 // DOM-элементы
 const quizForm = document.getElementById('quiz-form');
