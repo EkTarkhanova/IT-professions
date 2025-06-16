@@ -122,7 +122,7 @@ async function init() {
   try {
     professions = await loadJSON(professionsURL);
     const questionsData = await loadJSON(questionsURL);
-    questions = questionsData.questions;
+    questions = questionsData;
 
     console.log('professions loaded:', professions);
     console.log('questions loaded:', questions);
